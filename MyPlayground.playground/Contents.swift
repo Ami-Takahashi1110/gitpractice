@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import Security
 
 //var greeting = "Hello, playground"
 
@@ -275,7 +276,7 @@ class NamedShape {
 // サブクラスはクラス名の後に:をつける
 class Square: NamedShape {
     var sideLength:Double
-    
+    // イニシャライザの呼び出し
     init(sideLength: Double, name: String){
         self.sideLength = sideLength
         // superクラスの呼び出し
@@ -318,7 +319,7 @@ class Circle: NamedShape{
 // ①サブクラスが宣言している値（sideLength）を設定
 class EquilateralTriangle: NamedShape {
     var sideLength: Double = 0.0
-    
+    // イニシャライザの呼び出し
     init (sideLength: Double, name: String) {
         self.sideLength = sideLength
         // ②superクラスのイニシャライザを呼び出す
@@ -348,6 +349,7 @@ print(triangle.sideLength)
 // 三角形の辺の長さと四角形の辺の長さが常に同じになる
 class TriangleAndSquare {
     var triangle: EquilateralTriangle {
+        // プロパティの変更前に処理を書く
         willSet {
             square.sideLength = newValue.sideLength
         }
@@ -358,14 +360,270 @@ class TriangleAndSquare {
             triangle.sideLength = newValue.sideLength
         }
     }
+    // イニシャライザの呼び出し
     init(size: Double, name: String) {
         square = Square(sideLength: size, name: name)
         triangle = EquilateralTriangle(sideLength: size, name: name)
     }
 }
+
+// triangleAndSquareは引数がsquareとtriangle
 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
 print(triangleAndSquare.square.sideLength)
 print(triangleAndSquare.triangle.sideLength)
 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
 print(triangleAndSquare.triangle.sideLength)
 
+// オプショナル型を使用するときは?を使用する
+// この場合は引数にnilを許容する
+let optionalSquare: Square? = Square(sideLength: 2.5, name: "Square")
+let sideLength = optionalSquare?.sideLength
+
+// 列挙型と構造体
+// enumを使って列挙型を作ることができる
+// enumはjavaのときに使わなかったので使い道が知りたい
+enum Rank: Int {
+    // 列挙体の定義
+    case ace = 1  //明示的に1を指定する
+    case two, three, four, five, six, seven, eight, nine, ten
+    case jack, queen, king
+    
+    // swiftではメソッドが追加できる
+    // rawValueメソッドはデフォルト値から使われた分だけ1ずつ増加する
+    func simpleDescription() -> String {
+        // switch文で条件分岐
+        switch self {
+        case .ace:
+            return "ace"
+        case .jack:
+            return "jack"
+        case .queen:
+            return "queen"
+        case .king:
+            return "king"
+        default:
+            return String(self.rawValue)
+        }
+    }
+}
+// 変数aceにRankクラスのaceを代入
+let ace = Rank.ace
+// rawValueプロパティで列挙体の呼び出しができる？
+// これはdefaultの処理に入っている？
+let aceRawValue = ace.rawValue
+
+//　if let構文 値がnilかどうかをチェックする
+// コードを書く行を短縮できる
+if let convertedRank = Rank(rawValue: 3){
+    let threeDescription = convertedRank.simpleDescription()
+}
+    
+//
+enum Suit {
+    case spades, hearts, diamonds, clubs
+    
+    func simpleDescription() -> String {
+        
+        switch self {  //selfの値はSuitとなっている
+        case .spades:
+            return "spades"
+        case .hearts:
+            return "hearts"
+        case .diamonds:
+            return "diammonds"
+        case .clubs:
+            return "clubs"
+        }
+    }
+}
+let hearts = Suit.hearts  // 値が指定されていないので、heartsがそのまま代入される
+let heartsDescription = hearts.simpleDescription()
+
+// serverの状態をデフォルト値として設定することもできる（特に代入などしていない）
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+}
+let success = ServerResponse.result("6:00 am", "8:09pm")
+let failure = ServerResponse.failure("Out of cheese.")
+
+switch success {
+case let .result(sunrise, sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+case let .failure(message):
+    print("Failure... \(message)")
+
+}
+
+// 構造体を使うときにはstructを使用する
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+}
+let threeOfSpades = Card(rank: .three, suit: .spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+
+// Concurrency　非同期処理…asyncを使用する
+// Concurrency 非同期処理、並行処理のコードを簡潔かつ安全に記述できる機能
+func fetchUserID(from server: String) async -> Int {
+    if server == "primary" {
+        return 97
+    }
+    return 501
+}
+// 非同期のメソッドを呼び出す際にはasyncを使用する
+func fetchUsername(from server: String) async -> String {
+    let userID = await fetchUserID(from: server)
+    if userID == 501 {
+        return "John Appleseed"
+    }
+    return "Guest"
+}
+// 他の非同期処理と並行して実行するためにはasync letを使用する
+func connectUser(to server: String) async {
+    async let userID = fetchUserID(from: server)
+    async let username = fetchUsername(from: server)
+    let greeting = await "Hello \(username), user ID \(userID)"
+    print(greeting)
+}
+// 非同期処理を構造化するにはtaskを使う
+Task {
+    await connectUser(to: "primary")
+}
+
+//プロトコル javaでいうインターフェースの生成
+//プロトコルには関数などの処理を記載しないで、継承したクラスなどで関数を実行する
+protocol ExampleProtocol {
+    var simpleDescription: String { get }
+    mutating func adjust()
+    }
+class SimpleClass: ExampleProtocol {
+    var simpleDescription: String = "A very simple class."
+    var anotherProperty: Int = 69105
+    func adjust() {
+        simpleDescription += " Now 100% adjusted."
+    }
+}
+    
+var a = SimpleClass()
+a.adjust()
+let aDescription = a.simpleDescription
+
+struct SimpleStructure: ExampleProtocol {
+    var simpleDescription: String = "A simple structure"
+    mutating func adjust() {
+        simpleDescription += " (adjusted)"
+    }
+}
+var b = SimpleStructure()
+b.adjust()
+let bDescription = b.simpleDescription
+
+// 自身の値を変更する場合、funcの前にmutatingキーワードを書く
+extension Int: ExampleProtocol {
+    var simpleDescription: String {
+        return "The number \(self)"
+    }
+    mutating func adjust() {
+        self += 42
+    }
+}
+print(7.simpleDescription)
+
+//
+let protocolValue: ExampleProtocol = a
+print(protocolValue.simpleDescription)
+
+//例外処理(プロトコル)
+enum PrinterError: Error {
+    case outOfPaper
+    case noToner
+    case onFire
+}
+// throwやthrowsで例外処理であることを示している
+func send(job: Int, toPrinter printerName: String) throws ->
+String {
+    if printerName == "Never Has Toner" {
+        throw PrinterError.noToner
+    }
+    return "Job sent"
+}
+
+// エラーの処理にはdo-catchを使用できる
+do {
+    let printerResponse = try send(job: 1040, toPrinter:"Bi Sheng")
+    print(printerResponse)
+} catch {
+    print(error)
+}
+// do-catch 複数ケースありパターン
+do {
+    let printerResponse = try send(job: 1440, toPrinter:"Gutenberg")
+    print(printerResponse)
+} catch PrinterError.onFire{
+    print("I'll just put this over here, with the rest of the fire.")
+} catch let printerError as PrinterError {
+    print("Printer error: \(printerError).")
+} catch {
+    print(error)
+}
+// オプショナル型で結果を?に代入する
+// オプショナルはnilを返すことができる
+// javaみたいにnullpointerexceptionを返すことがあると、スマホアプリなどを作る際だと途中で落ちたら使いにくい。
+// try?だとエラーを一つ見落としてしまうことがある
+let printerSuccess = try? send(job: 1884, toPrinter:"Mergenthaler")
+let printerFailure = try? send(job: 1885, toPrinter: "Toner")
+
+// スコープを抜けずに必ず実行したい処理があるときはdeferを使用する
+var fridgeIsOpen = false
+let fridgeContent = ["milk", "eggs", "leftovers"]
+
+func fridgeContains(_ food: String) -> Bool {
+    fridgeIsOpen = true
+    defer {
+        fridgeIsOpen = false
+    }
+    let result = fridgeContent.contains(food)
+    return result
+}
+fridgeContains("banana")
+print(fridgeIsOpen)
+
+// ジェネリクスは１度の定義であらゆる型に対応できる
+// 関数名<>()で()内に指定する変数型を記載する
+func makeArray<Item>(repeating item: Item, numberOfTimes: Int) -> [Item] {
+    var result: [Item] = []
+    for _ in 0..<numberOfTimes {
+        result.append(item)
+    }
+    return result
+}
+makeArray(repeating: "knock", numberOfTimes: 4)
+
+
+// 関数だけでなく列挙型、メソッドや構造体もジェネリクスで対応できる
+// 列挙型の例
+enum OptionalValue<Wrapped> {
+    case none
+    case some(Wrapped)
+}
+var possibleInteger: OptionalValue<Int> = .none
+possibleInteger = .some(100)
+
+// プロトコルを実装した型、特定のスーパークラスを持つクラスなどにも使う際にはwhereを使って実装できる
+func anyCommonElements<T: Sequence, U: Sequence>(_ lhs: T, _ rhs: U) -> Bool
+    where T.Element: Equatable, T.Element == U.Element
+{
+    for lhsItem in lhs {
+        for rhsItem in rhs {
+            if lhsItem == rhsItem {
+                return true
+            }
+        }
+    }
+    return false
+}
+anyCommonElements([1, 2, 3], [3])
