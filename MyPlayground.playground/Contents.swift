@@ -533,7 +533,7 @@ extension Int: ExampleProtocol {
 }
 print(7.simpleDescription)
 
-//
+// 
 let protocolValue: ExampleProtocol = a
 print(protocolValue.simpleDescription)
 
