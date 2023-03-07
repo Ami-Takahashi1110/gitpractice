@@ -9,8 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // UIViewControllerのviewDidLoad()メソッドを上書き
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad is called")
         // Do any additional setup after loading the view.
     }
 
