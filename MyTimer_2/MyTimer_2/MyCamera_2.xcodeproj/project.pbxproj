@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1129D329B744C600A81D95 /* EffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1129D229B744C600A81D95 /* EffectViewController.swift */; };
 		CEBCDA7B299F964900D52369 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCDA7A299F964900D52369 /* AppDelegate.swift */; };
 		CEBCDA7D299F964900D52369 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCDA7C299F964900D52369 /* SceneDelegate.swift */; };
 		CEBCDA7F299F964900D52369 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBCDA7E299F964900D52369 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE1129D229B744C600A81D95 /* EffectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectViewController.swift; sourceTree = "<group>"; };
 		CEBCDA77299F964900D52369 /* MyCamera_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCamera_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEBCDA7A299F964900D52369 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEBCDA7C299F964900D52369 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				CEBCDA7C299F964900D52369 /* SceneDelegate.swift */,
 				CEBCDA7E299F964900D52369 /* ViewController.swift */,
 				CEBCDA80299F964900D52369 /* Main.storyboard */,
+				CE1129D229B744C600A81D95 /* EffectViewController.swift */,
 				CEBCDA83299F964F00D52369 /* Assets.xcassets */,
 				CEBCDA85299F964F00D52369 /* LaunchScreen.storyboard */,
 				CEBCDA88299F964F00D52369 /* Info.plist */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEBCDA7F299F964900D52369 /* ViewController.swift in Sources */,
+				CE1129D329B744C600A81D95 /* EffectViewController.swift in Sources */,
 				CEBCDA7B299F964900D52369 /* AppDelegate.swift in Sources */,
 				CEBCDA7D299F964900D52369 /* SceneDelegate.swift in Sources */,
 			);
