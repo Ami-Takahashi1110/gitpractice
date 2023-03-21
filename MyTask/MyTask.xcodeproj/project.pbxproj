@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47A7897732612BD53F3ABB57 /* Pods_MyTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41068EFAF3635DE3FEDF5AE4 /* Pods_MyTask.framework */; };
+		CE4B533429C8654F00B7F9B2 /* Pods_MyTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41068EFAF3635DE3FEDF5AE4 /* Pods_MyTask.framework */; };
+		CE4B533529C8654F00B7F9B2 /* Pods_MyTask.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 41068EFAF3635DE3FEDF5AE4 /* Pods_MyTask.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE6E160529C823B0006F087A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E160429C823B0006F087A /* AppDelegate.swift */; };
 		CE6E160729C823B0006F087A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E160629C823B0006F087A /* SceneDelegate.swift */; };
 		CE6E160929C823B0006F087A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E160829C823B0006F087A /* ViewController.swift */; };
@@ -17,6 +18,20 @@
 		CE6E161929C82AB0006F087A /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E161829C82AB0006F087A /* TaskViewController.swift */; };
 		CE6E161B29C83CE5006F087A /* UserTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E161A29C83CE5006F087A /* UserTable.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE4B533629C8654F00B7F9B2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE4B533529C8654F00B7F9B2 /* Pods_MyTask.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		13619425375C7443D7158A1D /* Pods-MyTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTask.debug.xcconfig"; path = "Target Support Files/Pods-MyTask/Pods-MyTask.debug.xcconfig"; sourceTree = "<group>"; };
@@ -39,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47A7897732612BD53F3ABB57 /* Pods_MyTask.framework in Frameworks */,
+				CE4B533429C8654F00B7F9B2 /* Pods_MyTask.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +124,7 @@
 				CE6E15FE29C823B0006F087A /* Frameworks */,
 				CE6E15FF29C823B0006F087A /* Resources */,
 				602CD746B0DD7DDC65707613 /* [CP] Embed Pods Frameworks */,
+				CE4B533629C8654F00B7F9B2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

@@ -60,19 +60,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchDisplayController" destination="rU0-EP-Ody" id="E0s-MX-MML"/>
+                        <outlet property="searchText" destination="SKk-lb-1f5" id="IuT-6k-4iL"/>
+                        <outlet property="tableView" destination="ECc-eg-I8g" id="62Y-2G-SN3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="rU0-EP-Ody">
-                    <connections>
-                        <outlet property="delegate" destination="BYZ-38-t0r" id="huv-Sr-Vip"/>
-                        <outlet property="searchBar" destination="SKk-lb-1f5" id="mLZ-Bx-H5k"/>
-                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="319-c2-Mqu"/>
-                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="j63-jM-ofg"/>
-                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="dng-PX-7tf"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="101.5267175572519" y="3.5211267605633805"/>
         </scene>
@@ -106,8 +98,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gmc-DT-k8I">
-                                <rect key="frame" x="24" y="249" width="353" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gmc-DT-k8I">
+                                <rect key="frame" x="24" y="259" width="353" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -137,8 +129,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="6Pu-Xa-1Am">
-                                <rect key="frame" x="16" y="152" width="361" height="26"/>
+                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="6Pu-Xa-1Am">
+                                <rect key="frame" x="16" y="123.99999999999999" width="361" height="34.333333333333329"/>
                             </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RKU-HL-IR6"/>
