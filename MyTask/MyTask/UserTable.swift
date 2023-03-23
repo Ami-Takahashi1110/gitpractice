@@ -1,5 +1,6 @@
 //
 //  UserTable.swift
+//  タスクのモデル定義クラス
 //  MyTask
 //
 //  Created by USER on 2023/03/20.
@@ -8,8 +9,10 @@
 import Foundation
 import RealmSwift
 
+// インプット項目の定義（モデル定義）
 class UserTable: Object {
-    // インプット項目の定義
+    // id
+    @objc dynamic var id: String = "" // プライマリーキー項目
     // 日付
     @objc dynamic var date: Date = Date()
     // タイトル
@@ -18,16 +21,16 @@ class UserTable: Object {
     @objc dynamic var contents: String = ""
     // カテゴリー
     @objc dynamic var category: String = ""
+    
+    // プライマリーキーの指定
+    override class func primaryKey() -> String? {
+        return "id" // idをプライマリーキーに指定する
+    }
+    
 
-    // 前画面で入力された値を取得する方法はあとで調べる
     // 入力処理
     func input() {
         let userTable = UserTable()
-        userTable.date = Date(timeIntervalSince1970: 631152000) // 呼び出し方を考える
-        userTable.title = "aaa" // 呼び出し方を考える
-        userTable.contents = "bbb" // 呼び出し方を考える
-        userTable.category = "ccc" // 呼び出し方を考える
-        
         let realm = try! Realm()
         try! realm.write {
             realm.add(userTable)
@@ -55,8 +58,5 @@ class UserTable: Object {
             realm.delete(userTable)
         }
     }
-    
-    
-
 }
 

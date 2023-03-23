@@ -1,21 +1,67 @@
 //
 //  TaskViewController.swift
+//  テキストボックスへ文字を入力した時に呼び出すべきクラスを記載
 //  MyTask
 //
 //  Created by USER on 2023/03/20.
 //
 
 import UIKit
+import RealmSwift
 
-class TaskViewController: UIViewController {
-
+class TaskViewController: UIViewController, UITextFieldDelegate {
+    // UITextFieldDelegateプロトコルに準拠して、テキストフィールドのイベントを処理する
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var contentsTextField: UITextField!
+    @IBOutlet weak var categoryTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 各テキストフィールドのデリゲートをselfに設定する
+        titleTextField.delegate = self
+        contentsTextField.delegate = self
+        categoryTextField.delegate = self
+        // リターンキーを処理するUITextFieldDelegateメソッド
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
+    }
 
-        // Do any additional setup after loading the view.
+    // 保存ボタンのアクションメソッド
+    // テキストフィールドに入力した値を保存する
+    @IBAction func saveButton(_ sender: Any) {
+        // Realmインスタンスを取得
+        guard let realm = try? Realm() else {
+            print("エラー：Realmインスタンスを取得できませんでした")
+            return
+        }
+        // 新しいUserTableオブジェクトを作成して、プロパティを設定する
+        let userTable = UserTable()
+        userTable.title = titleTextField.text ?? ""
+        userTable.contents = contentsTextField.text ?? ""
+        userTable.category = categoryTextField.text ?? ""
+        // Realmに新しいオブジェクトを書き込む
+        do {
+            try realm.write {
+                realm.add(userTable)
+            }
+        } catch {
+            print("エラー：Realmに書き込めませんでした")
+        }
+        
+        // テキストフィールドをクリアする
+        titleTextField.text = ""
+        contentsTextField.text = ""
+        categoryTextField.text = ""
     }
     
-
+    // UITextFieldDelegateプロトコルのメソッドを実装
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+    
     /*
     // MARK: - Navigation
 
