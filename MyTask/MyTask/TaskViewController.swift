@@ -1,6 +1,6 @@
 //
 //  TaskViewController.swift
-//  テキストボックスへ文字を入力した時に呼び出すべきクラスを記載
+//  画面に入力したデータをDBへ保存、または保存せずに前画面に戻るクラス
 //  MyTask
 //
 //  Created by USER on 2023/03/20.
@@ -39,6 +39,7 @@ class TaskViewController: UIViewController, UITextFieldDelegate {
         }
         // 新しいUserTableオブジェクトを作成して、プロパティを設定する
         let userTable = UserTable()
+        userTable.date = datePicker.date
         userTable.title = titleTextField.text ?? ""
         userTable.contents = contentsTextField.text ?? ""
         userTable.category = categoryTextField.text ?? ""
@@ -55,12 +56,17 @@ class TaskViewController: UIViewController, UITextFieldDelegate {
         titleTextField.text = ""
         contentsTextField.text = ""
         categoryTextField.text = ""
+        datePicker.date = Date()
     }
     
     // UITextFieldDelegateプロトコルのメソッドを実装
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }
+    
+    // 戻るボタンのアクションメソッド
+    
+    
     
     /*
     // MARK: - Navigation
@@ -71,5 +77,4 @@ class TaskViewController: UIViewController, UITextFieldDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

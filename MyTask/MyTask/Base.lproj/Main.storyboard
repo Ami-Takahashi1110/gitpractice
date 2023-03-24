@@ -30,12 +30,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHB-Ih-1BZ">
-                                <rect key="frame" x="355.66666666666669" y="60.000000000000007" width="13.333333333333314" height="25.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <searchBar contentMode="redraw" misplaced="YES" text="" translatesAutoresizingMaskIntoConstraints="NO" id="SKk-lb-1f5">
                                 <rect key="frame" x="0.0" y="101" width="393" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -43,25 +37,35 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="gV2-1N-acS"/>
                                 </connections>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wI5-pw-Db3">
+                                <rect key="frame" x="342" y="59" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="+">
+                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="nextPageButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l4b-wr-7b7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="SKk-lb-1f5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="6u7-2L-sh0"/>
                             <constraint firstItem="ECc-eg-I8g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7AS-oM-81g"/>
-                            <constraint firstItem="KHB-Ih-1BZ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="G9D-Wr-3OF"/>
                             <constraint firstItem="ECc-eg-I8g" firstAttribute="top" secondItem="SKk-lb-1f5" secondAttribute="bottom" id="Ody-oU-Pq2"/>
                             <constraint firstItem="ECc-eg-I8g" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="P9b-uj-1bm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ECc-eg-I8g" secondAttribute="bottom" id="QHi-nO-m5V"/>
                             <constraint firstItem="SKk-lb-1f5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SYu-v2-Zei"/>
                             <constraint firstItem="SKk-lb-1f5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aLo-zL-boX"/>
                             <constraint firstItem="SKk-lb-1f5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bwt-hX-p4M"/>
-                            <constraint firstAttribute="trailing" secondItem="KHB-Ih-1BZ" secondAttribute="trailing" constant="24" id="iKN-Gq-uZz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="searchText" destination="SKk-lb-1f5" id="IuT-6k-4iL"/>
                         <outlet property="tableView" destination="ECc-eg-I8g" id="62Y-2G-SN3"/>
+                        <segue destination="RAe-N0-e77" kind="show" identifier="showTaskView" id="beA-ol-nUh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -73,7 +77,7 @@
             <objects>
                 <viewController id="RAe-N0-e77" customClass="TaskViewController" customModule="MyTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pPi-kT-CJ6">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTW-ta-vBg">
@@ -162,6 +166,7 @@
                             <constraint firstItem="6pO-cg-PGe" firstAttribute="top" secondItem="OTW-ta-vBg" secondAttribute="bottom" constant="30" id="z0A-xI-Fh5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ygj-xL-DGl"/>
                     <connections>
                         <outlet property="categoryTextField" destination="Bca-AU-bQW" id="yRh-if-6Oc"/>
                         <outlet property="contentsTextField" destination="AaC-ke-Zfy" id="3gv-o6-f4F"/>
@@ -176,6 +181,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

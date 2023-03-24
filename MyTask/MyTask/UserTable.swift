@@ -1,6 +1,6 @@
 //
 //  UserTable.swift
-//  タスクのモデル定義クラス
+//  モデル定義クラス
 //  MyTask
 //
 //  Created by USER on 2023/03/20.
@@ -26,27 +26,7 @@ class UserTable: Object {
     override class func primaryKey() -> String? {
         return "id" // idをプライマリーキーに指定する
     }
-    
-
-    // 入力処理
-    func input() {
-        let userTable = UserTable()
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(userTable)
-        }
-    }
-        
-    // 更新処理
-    func update() {
-        let realm = try! Realm()
-        let userTable = realm.objects(UserTable.self).first // 最初のオブジェクトを取得する
-        // 内容を更新する
-        try! realm.write {
-            userTable?.contents = "ddd" // オブジェクトが見つからない場合を考えてオプショナル型にする
-        }
-    }
-        
+            
     // 削除処理
     func delete() {
         let realm = try! Realm()
